@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import Books from './Book';
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Books />
   </React.StrictMode>,
   document.getElementById('root')
 );
