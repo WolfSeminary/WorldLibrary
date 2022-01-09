@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 
-export default function SearchAppBar() {
+export default function AppBarCompoent() {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
