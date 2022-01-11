@@ -11,9 +11,8 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
-
 function FormRow(props) {
-const  arrBooks=props.arrBooks;
+  const arrBooks = props.arrBooks;
   return (
     <React.Fragment>
       <Grid item xs={4}>
@@ -29,26 +28,22 @@ const  arrBooks=props.arrBooks;
   );
 }
 export default function Books(props) {
- const allBooks = props.books;
+  const allBooks = props.books;
   let sliceArrBook;
   let i = 0;
   return (
-
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={1}>
         {allBooks.map((book, index) => {
-         sliceArrBook = allBooks.slice(i, 3);
-         i+=3;
+          sliceArrBook = allBooks.slice(i, 3);
+          i += 3;
           return (
-        
-          <Grid container item spacing={3}>
-            <FormRow arrBooks={sliceArrBook}/>
-          </Grid>
+            <Grid container item spacing={3}>
+              <FormRow arrBooks={sliceArrBook} />
+            </Grid>
           );
         })}
       </Grid>
     </Box>
   );
 }
-
-
