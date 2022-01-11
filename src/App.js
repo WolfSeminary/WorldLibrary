@@ -1,11 +1,16 @@
-
-
-import NoBooks from './NoBooks';
-
+import logo from './logo.svg';
+import './App.css';
+import Search from './SearchBook'
 function App() {
   return (
     <div className="App">
-     <NoBooks></NoBooks>
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload. Deploy-work!
+        </p>
+        <Search/>
+      </header>
     </div>
   );
 }
