@@ -1,10 +1,19 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography';
+import React from 'react';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const BookInfo = (props) => {
   return (
     <Card sx={{ maxWidth: 345 }} className="card">
+      <Stack direction="row" spacing={2}>
+        <Button variant="outlined" startIcon={<ArrowBackIcon />}>
+          Back to Books
+        </Button>
+      </Stack>
       <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
         Book Info
       </Typography>
@@ -16,7 +25,6 @@ const BookInfo = (props) => {
         <label>Description: </label>{props.description}
         <label>Num Of Pages: </label>{props.pageCount}
         <label>Language : </label>{props.language}
-
       </CardContent>
     </Card>)
 }
