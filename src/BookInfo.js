@@ -1,41 +1,28 @@
-import React from 'react';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent' 
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-import { CardActions } from '@mui/material';
-import { Button } from '@mui/material';
-
-export default function ActionAreaCard() {
-  return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
+const BookInfo=(props)=>{
+return <Card sx={{ maxWidth: 345 }}className="card">
+<Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+Book Info    
+  </Typography>
+  <CardContent>
+  <CardMedia
           component="img"
           height="140"
           image="/static/images/cards/contemplative-reptile.jpg"
           alt="green iguana"
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small">
-            Learn More
-        </Button>
-      </CardActions>
-    </Card>
-  );
-}
+      <label>Title: </label>{props.title}
+      <label>Author: </label>{props.authors}
+      <label>Publisher: </label>{props.publisher}
+      <label>Published Date: </label>{props.publishedDate}
+      <label>Description: </label>{props.description}
+      <label>Num Of Pages: </label>{props.pageCount}
+      <label>Language : </label>{props.language }
 
+  </CardContent>
+</Card>
+}
+export default BookInfo;
