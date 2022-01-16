@@ -5,12 +5,14 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { render } from "react-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const BookInfo = (props) => {
   return (
     <Card sx={{ maxWidth: 345 }} className="card">
       <Stack direction="row" spacing={2}>
-        <Button variant="outlined" startIcon={<ArrowBackIcon />}>
+        <Button onClick="navigate(-1)" variant="outlined" startIcon={<ArrowBackIcon />}>
           Back to Books
         </Button>
       </Stack>
