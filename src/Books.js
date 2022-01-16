@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -26,14 +26,20 @@ function FormRow(props) {
     </React.Fragment>
   );
 }
-export default function Books(props) {
-  const allBooks = props.books;
+
+export default function Books() {
+  const [books, setBooks] = useState([])
+  useEffect(() => {
+    fetch("https://www.googleapis.com/books/v1/volumes?q=Android&&maxResults=40")
+      .then((res) => res.json()).then(setBooks(res))
+  }, [])
+
   let sliceArrBook;
   let i = 0;
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={1}>
-        {allBooks.map((book, index) => {
+        {books.map((book, index) => {
           sliceArrBook = allBooks.slice(i, 3);
           i += 3;
           return (
