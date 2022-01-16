@@ -5,8 +5,6 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { render } from "react-dom";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const BookInfo = (props) => {
   return (
