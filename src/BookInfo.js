@@ -5,7 +5,6 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-
 const BookInfo = (props) => {
   function fetchDifferentBooks(){
     React.useEffect(()=>{
@@ -24,6 +23,12 @@ const BookInfo = (props) => {
         Book Info
       </Typography>
       <CardContent>
+        <CardMedia
+          component="img"
+          height="140"
+          image="/static/images/cards/contemplative-reptile.jpg"
+          alt="green iguana"
+        />
         <label>Title: </label>{props.title}
         <label>Author: </label>{props.authors}
         <label>Publisher: </label>{props.publisher}
