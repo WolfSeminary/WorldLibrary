@@ -67,6 +67,7 @@ export default function SearchInput() {
                         <StyledInputBase
                             placeholder="Search…"
                             inputProps={{ 'aria-label': 'search' }}
+                            OnChange={() => onSearch(target.value)}
                         />
                     </Search>
 
@@ -74,5 +75,8 @@ export default function SearchInput() {
             </AppBar>
         </Box>
     );
-
+}
+const [searchTerm, setsearchTerm] = useState("search");
+function onSearch(searchTerm) {
+    setsearchTerm = searchTerm;
 }
