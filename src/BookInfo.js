@@ -5,19 +5,21 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 const BookInfo = (props) => {
-  function fetchDifferentBooks(){
-    React.useEffect(()=>{
+  function fetchDifferentBooks() {
+    React.useEffect(() => {
       fetch("https://www.googleapis.com/books/v1/volumes?q=Android&&maxResults=40")
-            .then((res) => res.json()).then(setBooks(res))
-    },[])
+        .then((res) => res.json()).then(setBooks(res))
+    }, [])
   }
+
   return (
     <Card sx={{ maxWidth: 345 }} className="card">
       <Stack direction="row" spacing={2}>
         <Button variant="outlined" startIcon={<ArrowBackIcon />} onClick={fetchDifferentBooks}>
           Back to Books
-        </Button>s,eqkleko
+        </Button>
       </Stack>
       <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
         Book Info

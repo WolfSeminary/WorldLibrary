@@ -5,22 +5,22 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-export default function ActionAreaCard(props) {
+export default function ActionAreaCard({book}) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          image={props.BookImage}
+          image={book.volumeInfo.imageLinks.thumbnail}
           alt="green iguana"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {props.BookName}
+            {book.BookName}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {props.BookInfo}
+            {book.BookInfo}
           </Typography>
         </CardContent>
       </CardActionArea>
