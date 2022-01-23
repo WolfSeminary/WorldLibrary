@@ -70,7 +70,6 @@ export default function SearchInput() {
                             OnChange={() => onSearch(target.value)}
                         />
                     </Search>
-
                 </Toolbar>
             </AppBar>
         </Box>
@@ -78,5 +77,5 @@ export default function SearchInput() {
 }
 const [searchTerm, setsearchTerm] = useState("search");
 function onSearch(searchTerm) {
-    setsearchTerm = searchTerm;
+    setsearchTerm(searchTerm);
 }
