@@ -4,8 +4,15 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 
-export default function ActionAreaCard({book}) {
+export default function ActionAreaCard(props) {
+  const [isFree, setIsFree] = React.useState(true)
+  const handleChange = (event) => {
+    setIsFree(event.target.checked);
+  }
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
@@ -24,6 +31,10 @@ export default function ActionAreaCard({book}) {
           </Typography>
         </CardContent>
       </CardActionArea>
+      <FormGroup>
+        <FormControlLabel control={<Switch checked={isFree}
+          onChange={handleChange} />} label={isFree ? "free" : "borrowed"} />
+      </FormGroup>
     </Card>
   );
 }
