@@ -1,62 +1,47 @@
 import * as React from 'react';
-import { styled, Box } from '@mui/system';
-import ModalUnstyled from '@mui/base/ModalUnstyled';
-
-const StyledModal = styled(ModalUnstyled)`
-  position: fixed;
-  z-index: 1300;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Backdrop = styled('div')`
-  z-index: -1;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  -webkit-tap-highlight-color: transparent;
-`;
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 
 const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
     border: '2px solid #000',
-    p: 2,
-    px: 4,
-    pb: 3,
+    boxShadow: 24,
+    p: 4,
 };
 
-export default function ModalUnstyledDemo() {
+export default function ModalFunction() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     return (
         <div>
-            <button type="button" onClick={handleOpen}>
-                Open modal
-            </button>
-            <StyledModal
-                aria-labelledby="unstyled-modal-title"
-                aria-describedby="unstyled-modal-description"
+            <Button onClick={handleOpen}>Open modal</Button>
+            <Modal
                 open={open}
                 onClose={handleClose}
-                BackdropComponent={Backdrop}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <h2 id="unstyled-modal-title">Library - Books Status</h2>
-                    <p id="unstyled-modal-description">Free Books</p>
-                    <p id="unstyled-modal-description">Borrowed Books</p>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        Library - Books Status
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Free Books
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Borrowed Books:
+                    </Typography>
                 </Box>
-            </StyledModal>
+            </Modal>
         </div>
     );
 }
