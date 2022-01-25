@@ -75,7 +75,9 @@ export default function SearchInput() {
         </Box>
     );
 }
-const [searchTerm, setsearchTerm] = useState("search");
-function onSearch(searchTerm) {
-    setsearchTerm(searchTerm);
+export const setStateSearchTerm = () => {
+    const [searchTerm, setsearchTerm] = useState("search");
+    function onSearch(searchTerm) {
+        setsearchTerm(searchTerm);
+    }
 }
