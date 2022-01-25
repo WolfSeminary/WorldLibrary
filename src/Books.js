@@ -1,25 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Book from './Book';
+import FilterBorrowedBooks from './FilterBorrowedBooks';
 
 export default function Books() {
   const [books, setBooks] = useState([])
-
+  const [bookStatus, setBookStatus] = useState("free");
+  const [freeBooks ,setFreeBooks] = useState([]) 
   useEffect(() => {
     fetch("https://www.googleapis.com/books/v1/volumes?q=Android&&maxResults=40")
       .then((res) => res.json())
       .then((res) => {
-        setBooks(res.items.map(book => ({ ...book, status: "free" })))
+        const newBooks = res.items.map(book => ({ ...book, status: "free" }));
+        setBooks(newBooks)
+        setFreeBooks(newBooks);
       })
   }, [])
-
-  return (
+  
+const bookChange = (book) =>{
+  console.log(books);
+ setFreeBooks(books.filter(book => book.status=="free"));
+ console.log(freeBooks);  
+}
+  return (<>
+    <FilterBorrowedBooks onBookStatusChange = {() => bookStatus==="free"?setBookStatus("borrowed"):setBookStatus("free")}/>
     <Grid container spacing={1}>
-      {books.map((book, index) =>
+      {bookStatus === "free"? freeBooks.map((book, index) =>
         <Grid key={index} item xs={4}>
-          <Book book={book} />
+          <Book book={book} bookStatusChange = {(b) => bookChange(book)} />
+        </Grid>
+      ):
+      books.map((book, index) =>
+        <Grid key={index} item xs={4}>
+          <Book book={book} bookStatusChange = {(b) => bookChange(book)} />
         </Grid>
       )}
-    </Grid>
+    </Grid></>
   );
 }
