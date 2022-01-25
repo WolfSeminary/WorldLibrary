@@ -13,13 +13,19 @@ export default function ActionAreaCard({book}) {
   const handleChange = (event) => {
     setIsFree(event.target.checked);
   }
-  return (
+  return (<>
+    
     <Card sx={{ maxWidth: 345 }}>
+      {console.log(book)}
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          image={book.volumeInfo.imageLinks.thumbnail}
+          image={
+            book.volumeInfo.imageLinks === undefined
+              ? ""
+              : `${book.volumeInfo.imageLinks.thumbnail}`
+        }
           alt="green iguana"
         />
         <CardContent>
@@ -36,5 +42,6 @@ export default function ActionAreaCard({book}) {
           onChange={handleChange} />} label={isFree ? "free" : "borrowed"} />
       </FormGroup>
     </Card>
+    </>
   );
 }
