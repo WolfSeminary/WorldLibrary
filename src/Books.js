@@ -32,26 +32,22 @@ function FormRow(props) {
 
 export default function Books() {
   const [books, setBooks] = useState([])
+
   useEffect(() => {
     fetch("https://www.googleapis.com/books/v1/volumes?q=Android&&maxResults=40")
-      .then((res) => res.json()).then(setBooks(res))
+      .then((res) => res.json())
+      .then((res) => {
+        setBooks(res.items.map(book => ({ ...book, status: "free" })))
+      })
   }, [])
 
-  let sliceArrBook;
-  let i = 0;
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={1}>
-        {books.map((book, index) => {
-          sliceArrBook = allBooks.slice(i, 3);
-          i += 3;
-          return (
-            <Grid container item spacing={3}>
-              <FormRow arrBooks={sliceArrBook} />
-            </Grid>
-          );
-        })}
-      </Grid>
-    </Box>
+    <Grid container spacing={1}>
+      {books.map((book, index) =>
+        <Grid key={index} item xs={4}>
+          <Book book={book} />
+        </Grid>
+      )}
+    </Grid>
   );
 }
