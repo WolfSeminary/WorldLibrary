@@ -13,13 +13,13 @@ export default function Books() {
       })
   }, [])
 
-  return (<>
+  return (
     <Grid container spacing={1}>
       {books.map((book, index) =>
         <Grid key={index} item xs={4}>
           <Book book={book} />
         </Grid>
       )}
-    </Grid></>
+    </Grid>
   );
 }
