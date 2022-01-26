@@ -19,7 +19,8 @@ export default function ActionAreaCard({book}) {
         <CardMedia
           component="img"
           height="140"
-          image={book.volumeInfo.imageLinks.thumbnail}
+          // image={book.volumeInfo.imageLinks.thumbnail}
+          image={''}
           alt="green iguana"
         />
         <CardContent>
