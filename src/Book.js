@@ -8,7 +8,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 
-export default function ActionAreaCard({book}) {
+export default function ActionAreaCard({ book }) {
   const [isFree, setIsFree] = React.useState(true)
   const handleChange = (event) => {
     setIsFree(event.target.checked);
