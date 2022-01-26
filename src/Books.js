@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Book from './Book';
-import AppBarCompoent from './AppBarCompoent'
 
 export default function Books() {
   const [books, setBooks] = useState([])
@@ -15,7 +14,6 @@ export default function Books() {
   }, [])
 
   return (<>
-    <AppBarCompoent/>
     <Grid container spacing={1}>
       {books.map((book, index) =>
         <Grid key={index} item xs={4}>
