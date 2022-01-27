@@ -1,8 +1,8 @@
-export default function BooksStatus() {
-    function getBooksStatus(){
+export default function () {
+    function getBooksStatus() {
 
     }
     return (
-        <h2 onClick={getBooksStatus}>get books status</h2>
+        <button variant="outlined">Library Status</button>
     );
 }

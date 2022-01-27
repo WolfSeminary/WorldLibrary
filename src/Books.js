@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import Book from './Book';
 
 export default function Books() {
-  const [books, setBooks] = useState([])
+  const [books, setBooks] = useState([]);
 
   useEffect(() => {
     fetch("https://www.googleapis.com/books/v1/volumes?q=Android&&maxResults=40")
