@@ -19,6 +19,7 @@ export default function AppBarCompoent() {
                         sx={{ display: { xs: 'none', sm: 'block' } }}
                     >
                         library
+                       
                     </Typography>
                 </Toolbar>
             </AppBar>

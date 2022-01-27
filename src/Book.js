@@ -26,7 +26,11 @@ export default function ActionAreaCard(props) {
         <CardMedia
           component="img"
           height="140"
-          image={book.volumeInfo.imageLinks.thumbnail}
+          image={
+            book.volumeInfo.imageLinks === undefined
+              ? ""
+              : `${book.volumeInfo.imageLinks.thumbnail}`
+        }
           alt="green iguana"
         />
         <CardContent>
@@ -43,5 +47,5 @@ export default function ActionAreaCard(props) {
           onChange={handleChange} />} label={isFree ? "free" : "borrowed"} />
       </FormGroup>
     </Card>
-  );
+  )
 }
