@@ -10,7 +10,6 @@ import Switch from '@mui/material/Switch';
 import { useNavigate } from "react-router-dom";
 
 export default function ActionAreaCard(props) {
-<<<<<<< HEAD
   const [isFree, setIsFree] = useState(props.book.status === "free")
 
   const onStatusChange = () => {
@@ -18,15 +17,6 @@ export default function ActionAreaCard(props) {
     props.book.status === "free" ? props.book.status = "borrowed" : props.book.status = "free";
     props.bookStatusChange(props.book);
   }
-=======
-  const navigate = useNavigate();
-  function onBookClick() {
-    return (
-      navigate(`/ActionAreaCard/${props.BookInfo}`)
-    );
-  }
-  const [isFree, setIsFree] = React.useState(true)
->>>>>>> origin/master
   const handleChange = (event) => {
     ;
     setIsFree(event.target.checked);
@@ -38,17 +28,12 @@ export default function ActionAreaCard(props) {
         <CardMedia
           component="img"
           height="140"
-<<<<<<< HEAD
-          // image={props.book.volumeInfo.imageLinks.thumbnail}
-          alt={props.book.volumeInfo && props.book.volumeInfo.title}
-=======
           image={
             book.volumeInfo.imageLinks === undefined
               ? ""
               : `${book.volumeInfo.imageLinks.thumbnail}`
         }
           alt="green iguana"
->>>>>>> origin/master
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
