@@ -7,16 +7,21 @@ import { CardActionArea } from '@mui/material';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import { useNavigate } from "react-router-dom";
 
-export default function ActionAreaCard({ book }) {
+export default function ActionAreaCard(props) {
+  const navigate = useNavigate();
+  function onBookClick() {
+    return (
+      navigate(`/ActionAreaCard/${props.BookInfo}`)
+    );
+  }
   const [isFree, setIsFree] = React.useState(true)
   const handleChange = (event) => {
     setIsFree(event.target.checked);
   }
-  return (<>
-    
-    <Card sx={{ maxWidth: 345 }}>
-      {console.log(book)}
+  return (
+    <Card onClick={onBookClick} sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -42,6 +47,5 @@ export default function ActionAreaCard({ book }) {
           onChange={handleChange} />} label={isFree ? "free" : "borrowed"} />
       </FormGroup>
     </Card>
-    </>
-  );
+  )
 }
