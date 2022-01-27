@@ -1,25 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Book from './Book';
+import BooksStatus from './BooksStatus';
 
 export default function Books() {
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState([])
+  const [shouldModalOpen, setShouldModalOpen] = useState();
+
+  const getBooksStatus = () => {
+    setShouldModalOpen(true)
+  }
 
   useEffect(() => {
     fetch("https://www.googleapis.com/books/v1/volumes?q=Android&&maxResults=40")
       .then((res) => res.json())
       .then((res) => {
         setBooks(res.items.map(book => ({ ...book, status: "free" })))
+        setShouldModalOpen(false)
       })
   }, [])
 
   return (
-    <Grid container spacing={1}>
-      {books.map((book, index) =>
-        <Grid key={index} item xs={4}>
-          <Book book={book} />
-        </Grid>
-      )}
-    </Grid>
+    <>
+      <div onClick={getBooksStatus}>
+        {shouldModalOpen && <BooksStatus />}
+      </div>
+      <Grid container spacing={1}>
+        {books.map((book, index) =>
+          <Grid key={index} item xs={4}>
+            <Book book={book} />
+          </Grid>
+        )}
+      </Grid>
+    </>
   );
 }

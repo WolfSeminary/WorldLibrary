@@ -1,8 +1,10 @@
 export default function () {
-    function getBooksStatus() {
-
-    }
-    return (
-        <button variant="outlined">Library Status</button>
-    );
+    const BooksStatus = (book) => {
+        const [bookStatus,setBookStatus] = useState({id:book.id,status:"free"})
+        return (
+          <>
+            <Button variant="outlined">Library Status</Button>
+          </>
+        );
+      };
 }
