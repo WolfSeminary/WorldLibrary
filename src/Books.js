@@ -1,7 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+<<<<<<< HEAD
 import Book from './Book';
 import FilterBorrowedBooks from './FilterBorrowedBooks';
+=======
+import Book from './Book'
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+>>>>>>> origin/master
 
 export default function Books() {
   const [books, setBooks] = useState([])

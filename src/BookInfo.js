@@ -17,7 +17,7 @@ const BookInfo = (props) => {
   return (
     <Card sx={{ maxWidth: 345 }} className="card">
       <Stack direction="row" spacing={2}>
-        <Button variant="outlined" startIcon={<ArrowBackIcon />} onClick={fetchDifferentBooks}>
+        <Button onClick="navigate(-1)" variant="outlined" startIcon={<ArrowBackIcon />}>
           Back to Books
         </Button>
       </Stack>
