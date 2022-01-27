@@ -9,6 +9,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { useNavigate } from "react-router-dom";
 
+<<<<<<< HEAD
+export default function ActionAreaCard({ book }) {
+=======
 export default function ActionAreaCard(props) {
 <<<<<<< HEAD
   const [isFree, setIsFree] = useState(props.book.status === "free")
@@ -25,6 +28,7 @@ export default function ActionAreaCard(props) {
       navigate(`/ActionAreaCard/${props.BookInfo}`)
     );
   }
+>>>>>>> origin/master
   const [isFree, setIsFree] = React.useState(true)
 >>>>>>> origin/master
   const handleChange = (event) => {
@@ -39,9 +43,12 @@ export default function ActionAreaCard(props) {
           component="img"
           height="140"
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
           // image={props.book.volumeInfo.imageLinks.thumbnail}
           alt={props.book.volumeInfo && props.book.volumeInfo.title}
 =======
+>>>>>>> origin/master
           image={
             book.volumeInfo.imageLinks === undefined
               ? ""

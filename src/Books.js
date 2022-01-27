@@ -5,6 +5,18 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 <<<<<<< HEAD
 import Book from './Book';
+<<<<<<< HEAD
+import BooksStatus from './BooksStatus';
+
+export default function Books() {
+  const [books, setBooks] = useState([])
+  const [shouldModalOpen, setShouldModalOpen] = useState();
+
+  const getBooksStatus = () => {
+    setShouldModalOpen(true)
+  }
+
+=======
 import FilterBorrowedBooks from './FilterBorrowedBooks';
 =======
 import Book from './Book'
@@ -21,10 +33,31 @@ export default function Books() {
   const [books, setBooks] = useState([])
   const [bookStatus, setBookStatus] = useState("free");
   const [freeBooks ,setFreeBooks] = useState([]) 
+>>>>>>> origin/master
   useEffect(() => {
     fetch("https://www.googleapis.com/books/v1/volumes?q=Android&&maxResults=40")
       .then((res) => res.json())
       .then((res) => {
+<<<<<<< HEAD
+        setBooks(res.items.map(book => ({ ...book, status: "free" })))
+        setShouldModalOpen(false)
+      })
+  }, [])
+
+  return (
+    <>
+      <div onClick={getBooksStatus}>
+        {shouldModalOpen && <BooksStatus />}
+      </div>
+      <Grid container spacing={1}>
+        {books.map((book, index) =>
+          <Grid key={index} item xs={4}>
+            <Book book={book} />
+          </Grid>
+        )}
+      </Grid>
+    </>
+=======
         const newBooks = res.items.map(book => ({ ...book, status: "free" }));
         setBooks(newBooks)
         setFreeBooks(newBooks);
@@ -50,5 +83,6 @@ const bookChange = (book) =>{
         </Grid>
       )}
     </Grid></>
+>>>>>>> origin/master
   );
 }
