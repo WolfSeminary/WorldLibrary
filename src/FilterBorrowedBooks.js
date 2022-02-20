@@ -1,15 +1,9 @@
-import React from 'react';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+import { FormControlLabel, FormGroup, Switch } from '@mui/material';
 
-export const FilterBorrowedBooks = (props) => {
- const  onFilterChange=()=>{
- props.onBookStatusChange();
-  }
+export const FilterBorrowedBooks = ({ onChange }) => {
   return (
     <FormGroup>
-      <FormControlLabel control={<Switch onChange={onFilterChange} />} label="Get only free books" />
+      <FormControlLabel control={<Switch onChange={onChange} />} label="Get only free books" />
     </FormGroup>
   );
 }

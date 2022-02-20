@@ -1,25 +1,24 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography';
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import {
+  CardContent,
+  CardMedia, Card,
+  Typography,
+  Stack,
+  Button
+} from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate, useLocation } from "react-router-dom";
 
-const BookInfo = (props) => {
-  function fetchDifferentBooks() {
-    React.useEffect(() => {
-      fetch("https://www.googleapis.com/books/v1/volumes?q=Android&&maxResults=40")
-        .then((res) => res.json()).then(setBooks(res))
-    }, [])
-  }
-
-  return (
+export default function BookInfo() {
+  let navigate = useNavigate();
+  const location = useLocation();
+  const info = location.state;
+  console.log(info);
+  return (<>
+    <Button onClick={() => { navigate(-1) }} variant="outlined" startIcon={<ArrowBackIcon />}>
+      Back to Books
+  </Button>
     <Card sx={{ maxWidth: 345 }} className="card">
       <Stack direction="row" spacing={2}>
-        <Button onClick="navigate(-1)" variant="outlined" startIcon={<ArrowBackIcon />}>
-          Back to Books
-        </Button>
       </Stack>
       <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
         Book Info
@@ -28,17 +27,18 @@ const BookInfo = (props) => {
         <CardMedia
           component="img"
           height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image={info.volumeInfo.imageLinks.thumbnail}
           alt="green iguana"
         />
-        <label>Title: </label>{props.title}
-        <label>Author: </label>{props.authors}
-        <label>Publisher: </label>{props.publisher}
-        <label>Published Date: </label>{props.publishedDate}
-        <label>Description: </label>{props.description}
-        <label>Num Of Pages: </label>{props.pageCount}
-        <label>Language : </label>{props.language}
+        <label>Title: {info.volumeInfo.title}</label>
+        <label>Author: {info.volumeInfo.authors}</label>
+        <label>Publisher: {info.volumeInfo.publisher}</label>
+        <label>Published Date: {info.volumeInfo.publishedDate}</label>
+        <label>Description: {info.volumeInfo.description}</label>
+        <label>Num Of Pages: {info.volumeInfo.pageCount}</label>
+        <label>Language : {info.volumeInfo.language}</label>
       </CardContent>
-    </Card>)
+    </Card>
+  </>)
 }
-export default BookInfo;
+

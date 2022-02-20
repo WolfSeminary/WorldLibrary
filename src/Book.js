@@ -1,60 +1,46 @@
-import React, { useState } from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea, useThemeProps } from '@mui/material';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import { useNavigate } from "react-router-dom";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  FormControlLabel,
+  FormGroup,
+  Switch,
+  CardActionArea,
+} from "@mui/material";
 
-
-export default function ActionAreaCard(props) {
-  const [isFree, setIsFree] = useState(props.book.status === "free")
-
-  const onStatusChange = () => {
-    props.book.status === "free" ? props.book.status = "borrowed" : props.book.status = "free";
-    props.bookStatusChange(props.book);
-  }
-  const navigate = useNavigate();
-  function onBookClick() {
-    return (
-      navigate(`/ActionAreaCard/${props.BookInfo}`)
-    );
-  }
-
-  const handleChange = (event) => {
-    setIsFree(event.target.checked);
-    onStatusChange();
-  }
+export default function Book({ info, onStatusChange }) {
   return (
-    <Card onClick={onBookClick} sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          // image={props.book.volumeInfo.imageLinks.thumbnail}
-          alt={props.book.volumeInfo && props.book.volumeInfo.title}
-          image={
-            book.volumeInfo.imageLinks === undefined
-              ? ""
-              : `${book.volumeInfo.imageLinks.thumbnail}`
-        }
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {props.book.BookName}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {props.book.BookInfo}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <FormGroup>
-        <FormControlLabel control={<Switch checked={isFree} 
-          onChange={handleChange} />} label={isFree ? "free" : "borrowed"} />
-      </FormGroup>
-    </Card>
+    <>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            alt={info.volumeInfo && info.volumeInfo.title}
+            image={
+              info.volumeInfo.imageLinks === undefined
+                ? ""
+                : `${info.volumeInfo.imageLinks.thumbnail}`
+            }
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {info.BookName}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {info.BookInfo}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <FormGroup>
+          <FormControlLabel control={<Switch checked={info.status == "borrowed"}
+            onChange={(e) => {
+              e.stopPropagation()
+              onStatusChange(info.id);
+            }} />} label={info.status == "free" ? "free" : "borrowed"} />
+        </FormGroup>
+      </Card>
+    </>
   )
 }
