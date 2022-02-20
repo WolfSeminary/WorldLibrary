@@ -1,16 +1,10 @@
-import { useState } from "react";
+import { Button, TextField } from "@mui/material";
 
-function FetchBooks() {
-    const [differentTopic, setDifferentTopic] = useState('');
-    const onTopicChange = (params) => {
-        setDifferentTopic(params);
-    }
+export default function FetchBooks({ onChange, onClick }) {
     return (
         <>
-            <Button variant="outlined" id="Fetch-Books-btn">Fetch Books</Button>
-            <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={(e) => onTopicChange(e.target.value)} />
+            <Button variant="outlined" id="Fetch-Books-btn" onClick={onClick}>Fetch Books</Button>
+            <TextField id="outlined-basic" variant="outlined" onChange={(e) => onChange(e.target.value)} />
         </>
     );
 }
-
-export default FetchBooks;
