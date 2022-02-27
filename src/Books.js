@@ -19,6 +19,14 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
+
 export default function Books() {
   const [books, setBooks] = useState([])
   const [shouldModalOpen, setShouldModalOpen] = useState(false);
@@ -26,6 +34,7 @@ export default function Books() {
   const [searchTerm, setSearchTerm] = useState("search");
   const [libraryStatus, setLibraryStatus] = useState("all");
   const [differentTopic, setDifferentTopic] = useState('andriod');
+  const [filteredBooks, setFilterBooks] = useState([]);
   const navigate = useNavigate();
   const onTopicChange = (params) => {
     setDifferentTopic(params);
@@ -40,9 +49,18 @@ export default function Books() {
       }
       )
   }
-
   const onSearch = (value) => {
     setSearchTerm(value);
+    const filter = books.filter(b =>
+      b.volumeInfo && (
+        b.volumeInfo.title.includes(value) ||
+        b.volumeInfo.authors.includes(value) ||
+        b.volumeInfo.pageCount == value ||
+        b.volumeInfo.publisher.includes(value) ||
+        (b.volumeInfo.description && b.volumeInfo.description.includes(value))
+      )
+    );
+    setFilterBooks(filter.length == 0 ? books : filter);
   }
   const getBooksStatus = () => {
     setShouldModalOpen(true)
@@ -97,7 +115,7 @@ export default function Books() {
           </div>
         </Grid>
       ) :
-        books.map((book, index) =>
+        (filteredBooks.length ? filteredBooks : books).map((book, index) =>
           <Grid key={index} item xs={4}>
             <div onClick={() => {
               onBookClick(book)

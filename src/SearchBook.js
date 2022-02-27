@@ -4,6 +4,7 @@ import {
     InputBase
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { useState } from 'react';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -46,7 +47,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchBook({ onSearch }) {
+    const [search , setSearch] = useState('');
+    const handleChange = (e) => {
+        setSearch(e.target.value)
+        onSearch(e.target.value);
+        e.stopPropagation()
 
+        
+    }
     return (
 
         <Search>
@@ -56,7 +64,8 @@ export default function SearchBook({ onSearch }) {
             <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ 'aria-label': 'search' }}
-                onChange={(e) => onSearch(e.target.value)}
+                onChange={handleChange}
+                value = {search}
             />
         </Search>
     );
