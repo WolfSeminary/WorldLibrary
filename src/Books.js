@@ -25,12 +25,12 @@ export default function Books() {
   const [searchTerm, setSearchTerm] = useState("search");
   const [libraryStatus, setLibraryStatus] = useState("all");
   const [differentTopic, setDifferentTopic] = useState('andriod');
+  const [filteredBooks, setFilterBooks] = useState([]);
   const navigate = useNavigate();
   const onTopicChange = (params) => {
     setDifferentTopic(params);
   }
   function fetchDifferentBooks() {
-    debugger;
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${differentTopic || 'andriod'}&&maxResults=40`)
       .then((res) => res.json()).then(res => {
         setBooks(res.items.map(book => ({ ...book, status: "free" })))
@@ -40,9 +40,18 @@ export default function Books() {
       }
       )
   }
-
   const onSearch = (value) => {
     setSearchTerm(value);
+    const filter = books.filter(b =>
+      b.volumeInfo && (
+        b.volumeInfo.title.includes(value) ||
+        b.volumeInfo.authors.includes(value) ||
+        b.volumeInfo.pageCount == value ||
+        b.volumeInfo.publisher.includes(value) ||
+        (b.volumeInfo.description && b.volumeInfo.description.includes(value))
+      )
+    );
+    setFilterBooks(filter.length == 0 ? books : filter);
   }
   const getBooksStatus = () => {
     setShouldModalOpen(true)
@@ -55,9 +64,9 @@ export default function Books() {
 
   useEffect(() => {
     fetch("https://www.googleapis.com/books/v1/volumes?q=Android&&maxResults=40")
-      .then((res) =>  res.json())
+      .then((res) => res.json())
       .then((res) => {
-        debugger;
+
         setBooks(res.items.map(book => ({ ...book, status: "free" })))
         setShouldModalOpen(false)
         setLibraryStatus("all");
@@ -96,7 +105,7 @@ export default function Books() {
           </div>
         </Grid>
       ) :
-        books.map((book, index) =>
+        (filteredBooks.length ? filteredBooks : books).map((book, index) =>
           <Grid key={index} item xs={4}>
             <div onClick={() => {
               onBookClick(book)
