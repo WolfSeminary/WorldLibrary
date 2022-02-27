@@ -9,6 +9,7 @@ import AppBarComponent from './AppBarComponent';
 import FetchBooks from './FetchBooks ';
 import BooksStatusModal from "./BooksStatusModal";
 import { useNavigate } from "react-router-dom";
+import NoBooks from './NoBooks';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -85,6 +86,7 @@ export default function Books() {
     <BooksStatusModal open={shouldModalOpen} onClose={() => { setShouldModalOpen(false) } } freeBooks={freeBooks.length} borrowedBooks={books.length-freeBooks.length}/>
     <FilterBorrowedBooks onChange={onFilterChange} />
     <FetchBooks onChange={onTopicChange} onClick={fetchDifferentBooks} />
+    { books.length==0 && <NoBooks />}
     <Grid container spacing={1}>
       {libraryStatus === "free" ? freeBooks.map((book, index) =>
         <Grid key={index} item xs={4}>
