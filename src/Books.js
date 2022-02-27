@@ -30,7 +30,6 @@ export default function Books() {
     setDifferentTopic(params);
   }
   function fetchDifferentBooks() {
-    debugger;
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${differentTopic || 'andriod'}&&maxResults=40`)
       .then((res) => res.json()).then(res => {
         setBooks(res.items.map(book => ({ ...book, status: "free" })))
@@ -83,7 +82,7 @@ export default function Books() {
   return (<>
     <AppBarComponent onSearch={onSearch} />
     <BooksStatus onClick={getBooksStatus} />
-    <BooksStatusModal open={shouldModalOpen} onClose={() => { setShouldModalOpen(false) }} />
+    <BooksStatusModal open={shouldModalOpen} onClose={() => { setShouldModalOpen(false) } } freeBooks={freeBooks.length} borrowedBooks={books.length-freeBooks.length}/>
     <FilterBorrowedBooks onChange={onFilterChange} />
     <FetchBooks onChange={onTopicChange} onClick={fetchDifferentBooks} />
     <Grid container spacing={1}>

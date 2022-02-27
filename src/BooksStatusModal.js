@@ -12,7 +12,7 @@ const style = {
     p: 4,
 };
 
-export default function ModalFunction({ open, onClose }) {
+export default function ModalFunction({ open, onClose,freeBooks,borrowedBooks }) {
     return (
         <div>
             <Modal
@@ -26,10 +26,10 @@ export default function ModalFunction({ open, onClose }) {
                         Library - Books Status
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Free Books
+                        Free Books:{freeBooks}
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Borrowed Books:
+                        Borrowed Books:{borrowedBooks}
                     </Typography>
                 </Box>
             </Modal>
