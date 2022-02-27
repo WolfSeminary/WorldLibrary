@@ -2,8 +2,6 @@ import { useState, useEffect, } from 'react';
 import { Paper, Grid } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
 import Book from './Book'
 import BooksStatus from './BooksStatus';
 import FilterBorrowedBooks from './FilterBorrowedBooks';
@@ -32,7 +30,7 @@ export default function Books() {
     setDifferentTopic(params);
   }
   function fetchDifferentBooks() {
-
+    debugger;
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${differentTopic || 'andriod'}&&maxResults=40`)
       .then((res) => res.json()).then(res => {
         setBooks(res.items.map(book => ({ ...book, status: "free" })))
@@ -57,9 +55,9 @@ export default function Books() {
 
   useEffect(() => {
     fetch("https://www.googleapis.com/books/v1/volumes?q=Android&&maxResults=40")
-      .then((res) => res.json())
+      .then((res) =>  res.json())
       .then((res) => {
-
+        debugger;
         setBooks(res.items.map(book => ({ ...book, status: "free" })))
         setShouldModalOpen(false)
         setLibraryStatus("all");
@@ -94,7 +92,7 @@ export default function Books() {
           <div onClick={(e) => {
             onBookClick(book)
           }}>
-            <Book info={book} onStatusChange={onStatusChange} />
+            <Book book={book} onStatusChange={onStatusChange} />
           </div>
         </Grid>
       ) :
@@ -103,7 +101,7 @@ export default function Books() {
             <div onClick={() => {
               onBookClick(book)
             }}>
-              <Book info={book} onStatusChange={onStatusChange} />
+              <Book book={book} onStatusChange={onStatusChange} />
             </div>
           </Grid>
         )}

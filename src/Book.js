@@ -1,3 +1,5 @@
+import { useState ,useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -11,12 +13,12 @@ import {
 
 
 export default function ActionAreaCard(props) {
-  const [isFree, setIsFree] = useState(props.book.status === "free")
+  const [isFree, setIsFree] = useState(props.book && props.book.status === "free")
 
   const onStatusChange = () => {
-    ;
     props.book.status === "free" ? props.book.status = "borrowed" : props.book.status = "free";
-    props.bookStatusChange(props.book);
+    props.onStatusChange(props.book);
+
   }
   const navigate = useNavigate();
   function onBookClick() {
@@ -24,14 +26,13 @@ export default function ActionAreaCard(props) {
       navigate(`/ActionAreaCard/${props.BookInfo}`)
     );
   }
-  const [isFree, setIsFree] = React.useState(true)
   const handleChange = (event) => {
-    ;
     setIsFree(event.target.checked);
     onStatusChange();
+    event.stopPropagation();
   }
   return (
-    <Card onClick={onBookClick} sx={{ maxWidth: 345 }}>
+    props.book ? <Card onClick={onBookClick} sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -41,9 +42,9 @@ export default function ActionAreaCard(props) {
           alt={props.book.volumeInfo && props.book.volumeInfo.title}
 
           image={
-            book.volumeInfo.imageLinks === undefined
+            props.book.volumeInfo.imageLinks === undefined
               ? ""
-              : `${book.volumeInfo.imageLinks.thumbnail}`
+              : `${props.book && props.book.volumeInfo && props.book.volumeInfo.imageLinks.thumbnail}`
         }
           alt="green iguana"
 
@@ -59,8 +60,8 @@ export default function ActionAreaCard(props) {
       </CardActionArea>
       <FormGroup>
         <FormControlLabel control={<Switch checked={isFree} 
-          onChange={handleChange} />} label={isFree ? "free" : "borrowed"} />
+          onClick={handleChange} />} label={isFree ? "free" : "borrowed"} />
       </FormGroup>
-    </Card>
+    </Card> : null
   )
 }
