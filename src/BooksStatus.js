@@ -1,8 +1,8 @@
-export default function () {
-    function getBooksStatus() {
-
-    }
-    return (
-        <button variant="outlined">Library Status</button>
-    );
+import { Button } from "@mui/material";
+export default function BooksStatus({ onClick }) {
+  return (
+    <>
+      <Button variant="outlined" onClick={onClick}>Library Status</Button>
+    </>
+  );
 }

@@ -1,10 +1,8 @@
-import React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
+import {
+    styled,
+    alpha,
+    InputBase
+} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 const Search = styled('div')(({ theme }) => ({
@@ -47,37 +45,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function SearchInput() {
+export default function SearchBook({ onSearch }) {
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
-                    >
-                    </Typography>
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
-                            OnChange={() => onSearch(target.value)}
-                        />
-                    </Search>
-                </Toolbar>
-            </AppBar>
-        </Box>
+
+        <Search>
+            <SearchIconWrapper>
+                <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+                onChange={(e) => onSearch(e.target.value)}
+            />
+        </Search>
     );
-}
-export const setStateSearchTerm = () => {
-    const [searchTerm, setsearchTerm] = useState("search");
-    function onSearch(searchTerm) {
-        setsearchTerm(searchTerm);
-    }
 }

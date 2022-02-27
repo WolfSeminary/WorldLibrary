@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea, useThemeProps } from '@mui/material';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import { useNavigate } from "react-router-dom";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  FormControlLabel,
+  FormGroup,
+  Switch,
+  CardActionArea,
+} from "@mui/material";
 
 
 export default function ActionAreaCard(props) {

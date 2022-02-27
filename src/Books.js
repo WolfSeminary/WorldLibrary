@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, } from 'react';
+import { Paper, Grid } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Book from './Book'
+import BooksStatus from './BooksStatus';
+import FilterBorrowedBooks from './FilterBorrowedBooks';
+import AppBarComponent from './AppBarComponent';
+import FetchBooks from './FetchBooks ';
+import BooksStatusModal from "./BooksStatusModal";
+import { useNavigate } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -12,38 +19,95 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+
 export default function Books() {
   const [books, setBooks] = useState([])
-  const [bookStatus, setBookStatus] = useState("free");
-  const [freeBooks ,setFreeBooks] = useState([]) 
+  const [shouldModalOpen, setShouldModalOpen] = useState(false);
+  const [freeBooks, setFreeBooks] = useState([])
+  const [searchTerm, setSearchTerm] = useState("search");
+  const [libraryStatus, setLibraryStatus] = useState("all");
+  const [differentTopic, setDifferentTopic] = useState('andriod');
+  const navigate = useNavigate();
+  const onTopicChange = (params) => {
+    setDifferentTopic(params);
+  }
+  function fetchDifferentBooks() {
+
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${differentTopic || 'andriod'}&&maxResults=40`)
+      .then((res) => res.json()).then(res => {
+        setBooks(res.items.map(book => ({ ...book, status: "free" })))
+        setShouldModalOpen(false)
+        setLibraryStatus("all");
+        filterFree();
+      }
+      )
+  }
+
+  const onSearch = (value) => {
+    setSearchTerm(value);
+  }
+  const getBooksStatus = () => {
+    setShouldModalOpen(true)
+  }
+
+  const onStatusChange = (id) => {
+    let allbooks = books.map(item => { return item.id == id ? { ...item, status: item.status === "free" ? "borrowed" : "free" } : item });
+    setBooks(allbooks);
+  }
+
   useEffect(() => {
     fetch("https://www.googleapis.com/books/v1/volumes?q=Android&&maxResults=40")
       .then((res) => res.json())
       .then((res) => {
-        const newBooks = res.items.map(book => ({ ...book, status: "free" }));
-        setBooks(newBooks)
-        setFreeBooks(newBooks);
+
+        setBooks(res.items.map(book => ({ ...book, status: "free" })))
+        setShouldModalOpen(false)
+        setLibraryStatus("all");
       })
   }, [])
-  
-const bookChange = (book) =>{
-  console.log(books);
- setFreeBooks(books.filter(book => book.status=="free"));
- console.log(freeBooks);  
-}
+
+  useEffect(() => {
+    filterFree();
+  }, [books])
+
+  const filterFree = () => {
+    setFreeBooks(books.filter(book => book.status === "free"));
+  }
+
+  const onFilterChange = () => {
+    setLibraryStatus(libraryStatus === "free" ? "all" : "free")
+    console.log(libraryStatus)
+  }
+
+  const onBookClick = (info) => {
+    navigate(`/book/${info.id}`, { state: info })
+  }
   return (<>
-    <FilterBorrowedBooks onBookStatusChange = {() => bookStatus==="free"?setBookStatus("borrowed"):setBookStatus("free")}/>
+    <AppBarComponent onSearch={onSearch} />
+    <BooksStatus onClick={getBooksStatus} />
+    <BooksStatusModal open={shouldModalOpen} onClose={() => { setShouldModalOpen(false) }} />
+    <FilterBorrowedBooks onChange={onFilterChange} />
+    <FetchBooks onChange={onTopicChange} onClick={fetchDifferentBooks} />
     <Grid container spacing={1}>
-      {bookStatus === "free"? freeBooks.map((book, index) =>
+      {libraryStatus === "free" ? freeBooks.map((book, index) =>
         <Grid key={index} item xs={4}>
-          <Book book={book} bookStatusChange = {(b) => bookChange(book)} />
+          <div onClick={(e) => {
+            onBookClick(book)
+          }}>
+            <Book info={book} onStatusChange={onStatusChange} />
+          </div>
         </Grid>
-      ):
-      books.map((book, index) =>
-        <Grid key={index} item xs={4}>
-          <Book book={book} bookStatusChange = {(b) => bookChange(book)} />
-        </Grid>
-      )}
-    </Grid></>
+      ) :
+        books.map((book, index) =>
+          <Grid key={index} item xs={4}>
+            <div onClick={() => {
+              onBookClick(book)
+            }}>
+              <Book info={book} onStatusChange={onStatusChange} />
+            </div>
+          </Grid>
+        )}
+    </Grid>
+  </>
   );
 }

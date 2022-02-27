@@ -1,13 +1,7 @@
-import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
+import { AppBar, Box, Toolbar, Typography } from '@mui/material';
+import SearchBook from "./SearchBook";
 
-export default function AppBarCompoent() {
+export default function AppBarComponent({ onSearch }) {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -19,8 +13,9 @@ export default function AppBarCompoent() {
                         sx={{ display: { xs: 'none', sm: 'block' } }}
                     >
                         library
-                       
+
                     </Typography>
+                    <SearchBook onSearch={onSearch} />
                 </Toolbar>
             </AppBar>
         </Box>
