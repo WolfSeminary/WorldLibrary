@@ -1,4 +1,4 @@
-import { useState ,useEffect} from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Card,
@@ -46,7 +46,7 @@ export default function ActionAreaCard(props) {
               ? ""
               : `${props.book && props.book.volumeInfo && props.book.volumeInfo.imageLinks.thumbnail}`
         }
-          alt="green iguana"
+        
 
         />
         <CardContent>

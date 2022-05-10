@@ -1,7 +1,6 @@
 import { useState, useEffect, } from 'react';
 import { Paper, Grid } from "@mui/material";
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Book from './Book'
 import BooksStatus from './BooksStatus';
 import FilterBorrowedBooks from './FilterBorrowedBooks';
@@ -19,12 +18,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+
 
 
 export default function Books() {
